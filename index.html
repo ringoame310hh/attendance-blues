@@ -87,9 +87,10 @@
         const div = document.createElement("div");
         div.className = "event";
         div.innerHTML = `
-          <div class="event-title">${e.date}：${e.title}</div>
+          <div class="event-title">[${e.ha}] ${e.date}：${e.title}</div>
           <button class="yes" onclick="vote('${doc.id}','yes')">参加</button>
           <button class="no" onclick="vote('${doc.id}','no')">欠席</button>
+          <button onclick="deleteEvent('${doc.id}')" style="background:#999;color:white;">削除</button>
           <div class="list">
             参加：${(e.yes || []).join(", ")}<br>
             欠席：${(e.no || []).join(", ")}
@@ -100,20 +101,25 @@
     });
 
   function addEvent() {
-    const date = prompt("日付（例：3/10）");
-    const title = prompt("内容（例：練習試合）");
-    if (!date || !title) return;
+  const date = prompt("日付");
+  const title = prompt("内容");
+  if (!date || !title) return;
 
-    db.collection("events").add({
-      date,
-      title,
-      yes: [],
-      no: []
-    });
-  }
+  const isHome = confirm("ホーム？\nOK = H / キャンセル = A");
+  const ha = isHome ? "H" : "A";
+
+  db.collection("events").add({
+    date,
+    title,
+    ha,
+    yes: [],
+    no: []
+  });
+}
+
 
   function vote(id, type) {
-    const name = prompt("名前を入力");
+    const name = prompt("名前");
     if (!name) return;
 
     const ref = db.collection("events").doc(id);
@@ -131,6 +137,12 @@
       });
     });
   }
+  function deleteEvent(id) {
+  if (!confirm("この日程を削除しますか？")) return;
+
+  db.collection("events").doc(id).delete();
+}
+
 </script>
 
 </body>
