@@ -65,10 +65,13 @@
 <script>
   // 🔴 Firebase設定（あとで書き換える）
   const firebaseConfig = {
-    apiKey: "ここにAPI_KEY",
-    authDomain: "ここにauthDomain",
-    projectId: "ここにprojectId"
-  };
+  apiKey: "AIzaSyAwqkVqedEvRZn_dZj5w0ScUjjyFqMmoeQ",
+  authDomain: "blues-attendance.firebaseapp.com",
+  projectId: "blues-attendance",
+  storageBucket: "blues-attendance.firebasestorage.app",
+  messagingSenderId: "256494769986",
+  appId: "1:256494769986:web:9ac04021128711aa945adb"
+};
 
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
