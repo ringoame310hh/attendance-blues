@@ -102,19 +102,23 @@
     <span class="ha">${e.type === "home" ? "H" : "A"}</span>
     ${e.date}：${e.title}
   </div>
+
   <button class="yes" onclick="vote('${doc.id}','yes')">参加</button>
   <button class="no" onclick="vote('${doc.id}','no')">欠席</button>
-  <button onclick="deleteEvent('${doc.id}')" style="background:#999;color:white;">
-    削除
-  </button>
+
   <div class="list">
     参加：<br>
-    ${(e.yes || []).map(v => `・${v.name}${v.comment ? "（" + v.comment + "）" : ""}`).join("<br>")}
+    ${(e.yes || []).map(v =>
+      `・${v.name}${v.comment ? "（" + v.comment + "）" : ""}`
+    ).join("<br>")}
     <br>
     欠席：<br>
-    ${(e.no || []).map(v => `・${v.name}${v.comment ? "（" + v.comment + "）" : ""}`).join("<br>")}
+    ${(e.no || []).map(v =>
+      `・${v.name}${v.comment ? "（" + v.comment + "）" : ""}`
+    ).join("<br>")}
   </div>
 `;
+
 
         eventsDiv.appendChild(div);
       });
