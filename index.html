@@ -115,22 +115,30 @@
     });
 
   function addEvent() {
-  const date = prompt("日付");
-  const title = prompt("相手");
-  if (!date || !title) return;
+  try {
+    const date = prompt("日付");
+    if (!date) return;
 
-  const isHome = confirm("ホームですか？\nOK = H / キャンセル = A");
+    const title = prompt("内容");
+    if (!title) return;
 
-  const type = isHome ? "home" : "away";
+    const isHome = confirm("ホームですか？\nOK = H / キャンセル = A");
+    const type = isHome ? "home" : "away";
 
-  db.collection("events").add({
-    date,
-    title,
-    type,
-    yes: [],
-    no: []
-  });
+    db.collection("events").add({
+      date,
+      title,
+      type,
+      yes: [],
+      no: []
+    });
+
+  } catch (e) {
+    alert("エラーが出ています。F12 → Console を確認してください");
+    console.error(e);
+  }
 }
+
 
   function vote(id, type) {
     const name = prompt("名前");
