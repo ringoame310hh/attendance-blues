@@ -135,6 +135,12 @@
       });
     });
   }
+  function deleteEvent(id) {
+  if (!confirm("この日程を削除しますか？")) return;
+
+  db.collection("events").doc(id).delete();
+}
+
 </script>
 
 </body>
