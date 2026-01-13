@@ -115,20 +115,18 @@
     });
 
   function addEvent() {
-  const date = prompt("日付（例：2026-03-10）");
-  const title = prompt("内容（例：リーグ戦 vs ○○）");
+  const date = prompt("日付");
+  const title = prompt("相手");
   if (!date || !title) return;
 
-  const type = prompt("ホーム or アウェイ？（home / away）", "home");
-  if (type !== "home" && type !== "away") {
-    alert("home か away を入力してください");
-    return;
-  }
+  const isHome = confirm("ホームですか？\nOK = H / キャンセル = A");
+
+  const type = isHome ? "home" : "away";
 
   db.collection("events").add({
     date,
     title,
-    type,   // ← ここが追加ポイント
+    type,
     yes: [],
     no: []
   });
