@@ -108,7 +108,7 @@
   const isHome = confirm("HorA？\nH = H / A = A");
   const ha = isHome ? "H" : "A";
 
-  const [month,day] = date.sprit("/");
+  const [month,day] = date.split("/");
     const sortDate = '${new Date().getFullYear()}${month.padStart(2,"0")}${day.padstart(2,"0")}';
 
   db.collection("events").add({
