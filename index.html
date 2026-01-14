@@ -111,7 +111,7 @@ function addEvent() {
 
   const sortDate = m * 100 + d;
 
-  const ha = confirm("HorA\nH = H / A = A") ? "H" : "A";
+  const ha = confirm("HorA\nOK = H / キャンセル = A") ? "H" : "A";
 
   db.collection("events").add({
     date,
