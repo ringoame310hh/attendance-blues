@@ -100,19 +100,19 @@
       });
     });
 
-  function addEvent() {
-  const date = prompt("日付");
-    const [m, d] = date.split("/").map(Number);
-const sortDate = m * 100 + d;
+  <script>
+function addEvent() {
+  const date = prompt("日付（例：2/18）");
+  if (!date) return;
+
+  const [m, d] = date.split("/").map(Number);
 
   const title = prompt("内容");
-  if (!date || !title) return;
+  if (!title) return;
 
-  const isHome = confirm("HorA？\nホーム = H / アウェイ = A");
-  const ha = isHome ? "H" : "A";
+  const sortDate = m * 100 + d;
 
-  const [month,day] = date.split("/");
-    const sortDate = '${new Date().getFullYear()}${month.padStart(2,"0")}${day.padstart(2,"0")}';
+  const ha = confirm("ホームですか？\nOK = H / キャンセル = A") ? "H" : "A";
 
   db.collection("events").add({
     date,
@@ -123,6 +123,8 @@ const sortDate = m * 100 + d;
     no: []
   });
 }
+</script>
+
 
 
   function vote(id, type) {
