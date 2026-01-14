@@ -99,10 +99,9 @@
         eventsDiv.appendChild(div);
       });
     });
-
-  <script>
+  
 function addEvent() {
-  const date = prompt("日付（例：2/18）");
+  const date = prompt("日付");
   if (!date) return;
 
   const [m, d] = date.split("/").map(Number);
@@ -112,7 +111,7 @@ function addEvent() {
 
   const sortDate = m * 100 + d;
 
-  const ha = confirm("ホームですか？\nOK = H / キャンセル = A") ? "H" : "A";
+  const ha = confirm("HorA\nH = H / A = A") ? "H" : "A";
 
   db.collection("events").add({
     date,
