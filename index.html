@@ -102,6 +102,9 @@
 
   function addEvent() {
   const date = prompt("日付");
+    const [m, d] = date.split("/").map(Number);
+const sortDate = m * 100 + d;
+
   const title = prompt("内容");
   if (!date || !title) return;
 
