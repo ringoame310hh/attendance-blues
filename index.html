@@ -79,7 +79,7 @@
   const eventsDiv = document.getElementById("events");
 
   // リアルタイム取得
-  db.collection("events").orderBy("date")
+  db.collection("events").orderBy("sortDate")
     .onSnapshot(snapshot => {
       eventsDiv.innerHTML = "";
       snapshot.forEach(doc => {
@@ -105,12 +105,15 @@
   const title = prompt("内容");
   if (!date || !title) return;
 
-  const isHome = confirm("ホーム？\nOK = H / キャンセル = A");
+  const isHome = confirm("HorA？\nH = H / A = A");
   const ha = isHome ? "H" : "A";
+
+  const [month,day] = date.sprit("/");
+    const sortDate = '${new Date().getFullYear()}${month.padStart(2,"0")}${day.padstart(2,"0")}';
 
   db.collection("events").add({
     date,
-    title,
+    sortDate,
     ha,
     yes: [],
     no: []
