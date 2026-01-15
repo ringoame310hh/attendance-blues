@@ -40,6 +40,7 @@
     }
     .yes { background: #4caf50; color: white; }
     .no { background: #f44336; color: white; }
+    .maybe{background: #f0ad4e; color:white;}
     .add {
       width: 100%;
       padding: 10px;
@@ -90,10 +91,12 @@
           <div class="event-title">[${e.ha}] ${e.date}：${e.title}</div>
           <button class="yes" onclick="vote('${doc.id}','yes')">参加</button>
           <button class="no" onclick="vote('${doc.id}','no')">欠席</button>
+          <button class="maybe" onclick="vote('${doc.id}','maybe')">未定</button>
           <button onclick="deleteEvent('${doc.id}')" style="background:#999;color:white;">削除</button>
           <div class="list">
             参加：${(e.yes || []).join(", ")}<br>
-            欠席：${(e.no || []).join(", ")}
+            欠席：${(e.no || []).join(", ")}<br>
+            未定:{(e.maybe || {}).join(",")}
           </div>
         `;
         eventsDiv.appendChild(div);
@@ -119,7 +122,8 @@ function addEvent() {
     title,
     ha,
     yes: [],
-    no: []
+    no: [],
+    maybe:[]
   });
 }
 
@@ -133,13 +137,17 @@ function addEvent() {
       const data = doc.data();
       const yes = new Set(data.yes || []);
       const no = new Set(data.no || []);
+      const maybe = new set(data.maybe || []);
       yes.delete(name);
       no.delete(name);
+      maybe.delete(name);
       if (type === "yes") yes.add(name);
       if (type === "no") no.add(name);
+      if (type === "maybe")maybe.add(name);
       ref.update({
         yes: Array.from(yes),
-        no: Array.from(no)
+        no: Array.from(no),
+        maybe: Array.from(maybe)
       });
     });
   }
