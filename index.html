@@ -96,7 +96,7 @@
           <div class="list">
             参加：${(e.yes || []).join(", ")}<br>
             欠席：${(e.no || []).join(", ")}<br>
-            未定:{(e.maybe || {}).join(",")}
+            未定:${(e.maybe || {}).join(",")}
           </div>
         `;
         eventsDiv.appendChild(div);
