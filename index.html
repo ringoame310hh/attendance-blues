@@ -137,7 +137,7 @@ function addEvent() {
       const data = doc.data();
       const yes = new Set(data.yes || []);
       const no = new Set(data.no || []);
-      const maybe = new set(data.maybe || []);
+      const maybe = new Set(Array.isArray(data.maybe) ? data.maybe : []);
       yes.delete(name);
       no.delete(name);
       maybe.delete(name);
